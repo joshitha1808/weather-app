@@ -1,5 +1,4 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 
 class WeatherScreen extends StatelessWidget {
@@ -18,22 +17,17 @@ class WeatherScreen extends StatelessWidget {
         ),
         centerTitle: true,
         actions: [
-          IconButton(onPressed: () {}, icon: Icon(Icons.refresh)),
-          /*InkWell(
-            onTap: () {
-              print('refresh');
-            },
-            child: const Icon(Icons.refresh),
-          ),*/
+          IconButton(onPressed: () {}, icon: const Icon(Icons.refresh)),
         ],
       ),
+
       body: Padding(
         padding: const EdgeInsets.all(16.0),
+
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-
           children: [
-            //main card
+            // main card
             SizedBox(
               width: double.infinity,
               child: Card(
@@ -49,7 +43,7 @@ class WeatherScreen extends StatelessWidget {
                       padding: const EdgeInsets.all(16.0),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
+                        children: const [
                           Text(
                             '300°F',
                             style: TextStyle(
@@ -72,14 +66,67 @@ class WeatherScreen extends StatelessWidget {
                 ),
               ),
             ),
+
             const SizedBox(height: 20),
+
             const Text(
               'weather Forecast',
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
             ),
+
+            const SizedBox(height: 16),
+
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: const [
+                  HourleyForecastItem(),
+                  HourleyForecastItem(),
+                  HourleyForecastItem(),
+                  HourleyForecastItem(),
+                  HourleyForecastItem(),
+                ],
+              ),
+            ),
+            
           ],
         ),
       ),
     );
   }
 }
+
+class HourleyForecastItem extends StatelessWidget {
+  const HourleyForecastItem({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: 100,
+      child: Card(
+        elevation: 6,
+        child: Container(
+          padding: const EdgeInsets.all(8.0),
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(12)),
+          child: Column(
+            children: const [
+              Text(
+                '03:00',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: 8),
+              Icon(Icons.cloud, size: 32),
+              SizedBox(height: 8),
+              Text(
+                '320.10',
+                style: TextStyle(fontSize: 17, fontWeight: FontWeight.normal),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+
