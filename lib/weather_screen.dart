@@ -88,7 +88,35 @@ class WeatherScreen extends StatelessWidget {
                 ],
               ),
             ),
-            
+            //Additional Information
+            const SizedBox(height: 20),
+            const Text(
+              'Additional Information',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+            ),
+            const SizedBox(height: 16),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: const [
+                AdditionalForecast(
+                  icon: Icons.water_drop,
+                  label: 'Humidity',
+                  value: '91',
+                ),
+                //SizedBox(width: 60),
+                AdditionalForecast(
+                  icon: Icons.air,
+                  label: 'Wind Speed',
+                  value: '91',
+                ),
+                //SizedBox(width: 60),
+                AdditionalForecast(
+                  icon: Icons.beach_access,
+                  label: 'pressure',
+                  value: '7.5',
+                ),
+              ],
+            ),
           ],
         ),
       ),
@@ -129,4 +157,35 @@ class HourleyForecastItem extends StatelessWidget {
   }
 }
 
-
+class AdditionalForecast extends StatelessWidget {
+  final IconData icon;
+  final String label;
+  final String value;
+  const AdditionalForecast({
+    super.key,
+    required this.icon,
+    required this.label,
+    required this.value,
+  });
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.all(8.0),
+      child: Column(
+        children: [
+          Icon(icon, size: 35),
+          SizedBox(height: 8),
+          Text(
+            label,
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          ),
+          SizedBox(height: 8),
+          Text(
+            value,
+            style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+          ),
+        ],
+      ),
+    );
+  }
+}
