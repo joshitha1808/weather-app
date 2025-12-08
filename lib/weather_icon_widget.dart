@@ -18,6 +18,7 @@ class WeatherIconWidget extends StatefulWidget {
 class _WeatherIconWidgetState extends State<WeatherIconWidget> {
   @override
   Widget build(BuildContext context) {
+    //print(widget.iconCode);
     return Image.network(
       'https://openweathermap.org/img/wn/${widget.iconCode}@2x.png',
       fit: BoxFit.cover,

@@ -135,24 +135,44 @@ class _WeatherScreenState extends State<WeatherScreen> {
 
                 const SizedBox(height: 16),
 
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: [
-                      for (int i = 0; i < 5; i++)
-                        HourleyForecastItem(
-                          time: data['list'][i + 1]['dt'].toString(),
-                          icon: WeatherIconWidget(
-                            iconCode: data['list'][i + 1]['weather'][0]['icon'],
-                            height: 70,
-                            width: 70,
-                          ),
-                          temp: data['list'][i + 1]['main']['temp'].toString(),
+                // SingleChildScrollView(
+                //   scrollDirection: Axis.horizontal,
+                //   child: Row(
+                //     children: [
+                //       for (int i = 0; i < 30; i++)
+                //         HourleyForecastItem(
+                //           time: data['list'][i + 1]['dt'].toString(),
+                //           icon: WeatherIconWidget(
+                //             iconCode: data['list'][i + 1]['weather'][0]['icon'],
+                //             height: 70,
+                //             width: 70,
+                //           ),
+                //           temp: data['list'][i + 1]['main']['temp'].toString(),
+                //         ),
+                //     ],
+                //   ),
+                // ),
+                //Additional Information
+                SizedBox(
+                  height: 175,
+
+                  child: ListView.builder(
+                    itemCount: 6,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      final hourleyForecast = data['list'][index + 1];
+                      return HourleyForecastItem(
+                        time: hourleyForecast['dt'].toString(),
+                        icon: WeatherIconWidget(
+                          iconCode: hourleyForecast['weather'][0]['icon'],
+                          height: 70,
+                          width: 70,
                         ),
-                    ],
+                        temp: hourleyForecast['main']['temp'].toString(),
+                      );
+                    },
                   ),
                 ),
-                //Additional Information
                 const SizedBox(height: 20),
                 const Text(
                   'Additional Information',
@@ -202,8 +222,10 @@ class HourleyForecastItem extends StatelessWidget {
   });
   @override
   Widget build(BuildContext context) {
+    //print(icon);
     return SizedBox(
-      width: 100,
+      height: 175,
+      width: 150,
       child: Card(
         elevation: 6,
         child: Container(
@@ -213,14 +235,16 @@ class HourleyForecastItem extends StatelessWidget {
             children: [
               Text(
                 time,
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                maxLines: 1,
               ),
               SizedBox(height: 8),
               icon,
               SizedBox(height: 8),
               Text(
                 '${(double.parse(temp) - 273.15).toStringAsFixed(2)}°C',
-                style: TextStyle(fontSize: 17, fontWeight: FontWeight.normal),
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.normal),
+                maxLines: 1,
               ),
             ],
           ),
