@@ -219,7 +219,7 @@ class HourleyForecastItem extends StatelessWidget {
               icon,
               SizedBox(height: 8),
               Text(
-                temp,
+                '${(double.parse(temp) - 273.15).toStringAsFixed(2)}°C',
                 style: TextStyle(fontSize: 17, fontWeight: FontWeight.normal),
               ),
             ],
