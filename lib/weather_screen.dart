@@ -106,7 +106,11 @@ class _WeatherScreenState extends State<WeatherScreen> {
                                   fontSize: 32,
                                 ),
                               ),
-                              WeatherIconWidget(iconCode: icon),
+                              WeatherIconWidget(
+                                iconCode: icon,
+                                height: 150,
+                                width: 150,
+                              ),
                               Text(
                                 currentSky,
                                 style: const TextStyle(
@@ -134,12 +138,17 @@ class _WeatherScreenState extends State<WeatherScreen> {
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Row(
-                    children: const [
-                      HourleyForecastItem(),
-                      HourleyForecastItem(),
-                      HourleyForecastItem(),
-                      HourleyForecastItem(),
-                      HourleyForecastItem(),
+                    children: [
+                      for (int i = 0; i < 5; i++)
+                        HourleyForecastItem(
+                          time: data['list'][i + 1]['dt'].toString(),
+                          icon: WeatherIconWidget(
+                            iconCode: data['list'][i + 1]['weather'][0]['icon'],
+                            height: 70,
+                            width: 70,
+                          ),
+                          temp: data['list'][i + 1]['main']['temp'].toString(),
+                        ),
                     ],
                   ),
                 ),
@@ -182,8 +191,15 @@ class _WeatherScreenState extends State<WeatherScreen> {
 }
 
 class HourleyForecastItem extends StatelessWidget {
-  const HourleyForecastItem({super.key});
-
+  final String time;
+  final Widget icon;
+  final String temp;
+  const HourleyForecastItem({
+    super.key,
+    required this.time,
+    required this.icon,
+    required this.temp,
+  });
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -194,16 +210,16 @@ class HourleyForecastItem extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           decoration: BoxDecoration(borderRadius: BorderRadius.circular(12)),
           child: Column(
-            children: const [
+            children: [
               Text(
-                '03:00',
+                time,
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 8),
-              Icon(Icons.cloud, size: 32),
+              icon,
               SizedBox(height: 8),
               Text(
-                'time',
+                temp,
                 style: TextStyle(fontSize: 17, fontWeight: FontWeight.normal),
               ),
             ],

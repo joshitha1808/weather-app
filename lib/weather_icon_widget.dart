@@ -2,7 +2,14 @@ import 'package:flutter/material.dart';
 
 class WeatherIconWidget extends StatefulWidget {
   final String iconCode;
-  const WeatherIconWidget({super.key, required this.iconCode});
+  final double height;
+  final double width;
+  const WeatherIconWidget({
+    super.key,
+    required this.iconCode,
+    required this.height,
+    required this.width,
+  });
 
   @override
   State<WeatherIconWidget> createState() => _WeatherIconWidgetState();
@@ -14,8 +21,8 @@ class _WeatherIconWidgetState extends State<WeatherIconWidget> {
     return Image.network(
       'https://openweathermap.org/img/wn/${widget.iconCode}@2x.png',
       fit: BoxFit.cover,
-      width: 150,
-      height: 150,
+      width: widget.width,
+      height: widget.height,
     );
   }
 }
