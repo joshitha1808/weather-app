@@ -5,6 +5,7 @@ import 'package:weather_app/additional_info_item.dart';
 import 'package:weather_app/hourly_forecast_item.dart';
 import 'package:http/http.dart' as http;
 import 'package:weather_app/secrets.dart';
+import 'package:weather_app/weather_icon_widget.dart';
 
 class WeatherScreen extends StatefulWidget {
   const WeatherScreen({super.key});
@@ -69,9 +70,11 @@ class _WeatherScreenState extends State<WeatherScreen> {
           final currentweatherdata = data['list'][0];
 
           final double currentTemp = currentweatherdata['main']['temp'];
-          final currentsky = currentweatherdata['weather'][0]['main'];
+          final currentSky = currentweatherdata['weather'][0]['main'];
           final pressure = currentweatherdata['main']['pressure'];
           final windspeed = currentweatherdata['wind']['speed'];
+          final humidity = currentweatherdata['main']['humidity'];
+          final icon = currentweatherdata['weather'][0]['icon'];
 
           return Padding(
             padding: const EdgeInsets.all(16.0),
@@ -103,17 +106,12 @@ class _WeatherScreenState extends State<WeatherScreen> {
                                   fontSize: 32,
                                 ),
                               ),
-                              Icon(
-                                currentsky == 'Clouds' || currentsky == 'Rain'
-                                    ? Icons.cloud
-                                    : Icons.sunny,
-                                size: 64,
-                              ),
+                              WeatherIconWidget(icon: icon),
                               Text(
-                                currentsky,
+                                currentSky,
                                 style: const TextStyle(
-                                  fontWeight: FontWeight.w300,
-                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 26,
                                 ),
                               ),
                             ],
@@ -127,7 +125,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                 const SizedBox(height: 20),
 
                 const Text(
-                  'weather Forecast',
+                  'Hourley Forecast',
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
                 ),
 
@@ -158,7 +156,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                     AdditionalForecast(
                       icon: Icons.water_drop,
                       label: 'Humidity',
-                      value: '91',
+                      value: humidity.toString(),
                     ),
                     //SizedBox(width: 60),
                     AdditionalForecast(
@@ -205,7 +203,7 @@ class HourleyForecastItem extends StatelessWidget {
               Icon(Icons.cloud, size: 32),
               SizedBox(height: 8),
               Text(
-                '320.10',
+                'time',
                 style: TextStyle(fontSize: 17, fontWeight: FontWeight.normal),
               ),
             ],
