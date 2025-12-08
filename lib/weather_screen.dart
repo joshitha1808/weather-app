@@ -68,7 +68,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
 
           final currentweatherdata = data['list'][0];
 
-          final currentTemp = currentweatherdata['main']['temp'];
+          final double currentTemp = currentweatherdata['main']['temp'];
           final currentsky = currentweatherdata['weather'][0]['main'];
           final pressure = currentweatherdata['main']['pressure'];
           final windspeed = currentweatherdata['wind']['speed'];
@@ -97,7 +97,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Text(
-                                '$currentTemp K',
+                                '${(currentTemp - 273.15).toStringAsFixed(2)}°C',
                                 style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 32,
