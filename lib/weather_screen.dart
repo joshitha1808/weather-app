@@ -162,7 +162,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                     itemBuilder: (context, index) {
                       final hourleyForecast = data['list'][index + 1];
                       return HourleyForecastItem(
-                        time: hourleyForecast['dt'].toString(),
+                        time: hourleyForecast['dt_txt'].toString(),
                         icon: WeatherIconWidget(
                           iconCode: hourleyForecast['weather'][0]['icon'],
                           height: 70,
@@ -237,6 +237,7 @@ class HourleyForecastItem extends StatelessWidget {
                 time,
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 maxLines: 1,
+                overflow: TextOverflow.ellipsis,
               ),
               SizedBox(height: 8),
               icon,
