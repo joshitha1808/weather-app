@@ -6,6 +6,7 @@ import 'package:weather_app/hourly_forecast_item.dart';
 import 'package:http/http.dart' as http;
 import 'package:weather_app/secrets.dart';
 import 'package:weather_app/weather_icon_widget.dart';
+import 'package:intl/intl.dart';
 
 class WeatherScreen extends StatefulWidget {
   const WeatherScreen({super.key});
@@ -161,8 +162,9 @@ class _WeatherScreenState extends State<WeatherScreen> {
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context, index) {
                       final hourleyForecast = data['list'][index + 1];
+                      final time = DateTime.parse(hourleyForecast['dt_txt']);
                       return HourleyForecastItem(
-                        time: hourleyForecast['dt_txt'].toString(),
+                        time: DateFormat.j().format(time),
                         icon: WeatherIconWidget(
                           iconCode: hourleyForecast['weather'][0]['icon'],
                           height: 70,
