@@ -106,7 +106,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                                   fontSize: 32,
                                 ),
                               ),
-                              WeatherIconWidget(icon: icon),
+                              WeatherIconWidget(iconCode: icon),
                               Text(
                                 currentSky,
                                 style: const TextStyle(
