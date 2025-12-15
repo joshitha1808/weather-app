@@ -5,6 +5,7 @@ import 'package:weather_app/additional_info_item.dart';
 import 'package:weather_app/hourly_forecast_item.dart';
 import 'package:http/http.dart' as http;
 import 'package:weather_app/secrets.dart';
+import 'package:weather_app/utils/get_current_position.dart';
 import 'package:weather_app/weather_icon_widget.dart';
 import 'package:intl/intl.dart';
 
@@ -18,10 +19,11 @@ class WeatherScreen extends StatefulWidget {
 class _WeatherScreenState extends State<WeatherScreen> {
   Future<Map<String, dynamic>> getCurrentWeather() async {
     try {
-      String cityName = 'Mangalagiri';
+      final position = await getCurrentPosition();
+
       final res = await http.get(
         Uri.parse(
-          'https://api.openweathermap.org/data/2.5/forecast?q=$cityName,in&APPID=$openWeatherAPIKey',
+          'https://api.openweathermap.org/data/2.5/forecast?lat=${position.latitude}&lon=${position.longitude}&APPID=$openWeatherAPIKey',
         ),
       );
       final data = jsonDecode(res.body);
