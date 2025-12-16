@@ -73,16 +73,25 @@ class _WeatherScreenState extends State<WeatherScreen> {
         final pressure = currentweatherdata['main']['pressure'];
         final windspeed = currentweatherdata['wind']['speed'];
         final humidity = currentweatherdata['main']['humidity'];
-        final icon = currentweatherdata['weather'][0]['icon'];
+        //final icon = currentweatherdata['weather'][0]['icon'];
         final double temp = currentTemp - 273.15;
         final cityName = data['city']['name'];
-        final displayCity = cityName.isEmpty ? '' : cityName;
+        //final displayCity = cityName.isEmpty ? '' : cityName;
 
         return Scaffold(
           backgroundColor: getBackgroundColor(temp),
 
           appBar: AppBar(
-            title: Text(cityName),
+            title: Center(
+              child: Text(
+                cityName,
+                style: TextStyle(
+                  fontSize: 26,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+              ),
+            ),
             backgroundColor: getBackgroundColor(temp),
             actions: [
               IconButton(
