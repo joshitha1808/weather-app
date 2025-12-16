@@ -36,15 +36,15 @@ class _WeatherScreenState extends State<WeatherScreen> {
       throw e.toString();
     }
   }
-  //Background colour
 
+  //Background colour
   Color getBackgroundColor(double temp) {
     if (temp < 20) {
-      return Colors.pinkAccent;
+      return const Color(0xFFFF64D4);
     } else if (temp >= 20 && temp < 30) {
-      return Colors.blue;
+      return const Color(0xFF42C6FF);
     } else {
-      return Colors.yellowAccent;
+      return const Color(0xFFFFE142);
     }
   }
 
@@ -80,13 +80,14 @@ class _WeatherScreenState extends State<WeatherScreen> {
           backgroundColor: getBackgroundColor(temp),
 
           appBar: AppBar(
+            title: Center(child: Text('India')),
             backgroundColor: getBackgroundColor(temp),
             actions: [
               IconButton(
                 onPressed: () {
                   setState(() {});
                 },
-                icon: const Icon(Icons.refresh),
+                icon: const Icon(Icons.refresh, color: Colors.black),
               ),
             ],
           ),
@@ -113,7 +114,6 @@ class _WeatherScreenState extends State<WeatherScreen> {
                             style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 32,
-                              fontStyle: FontStyle.italic,
                             ),
                           ),
 
