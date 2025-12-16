@@ -80,14 +80,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
           backgroundColor: getBackgroundColor(temp),
 
           appBar: AppBar(
-            title: const Text(
-              'Weather App',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontStyle: FontStyle.normal,
-              ),
-            ),
-            centerTitle: true,
+            backgroundColor: getBackgroundColor(temp),
             actions: [
               IconButton(
                 onPressed: () {
@@ -123,6 +116,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                               fontStyle: FontStyle.italic,
                             ),
                           ),
+
                           // WeatherIconWidget(
                           //   iconCode: icon,
                           //   height: 150,
