@@ -50,179 +50,178 @@ class _WeatherScreenState extends State<WeatherScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      //backgroundColor: getBackgroundColor(temp),
-      appBar: AppBar(
-        title: const Text(
-          'Weather App',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontStyle: FontStyle.normal,
-          ),
-        ),
-        centerTitle: true,
-        actions: [
-          IconButton(
-            onPressed: () {
-              setState(() {});
-            },
-            icon: const Icon(Icons.refresh),
-          ),
-        ],
-      ),
+    return FutureBuilder(
+      future: getCurrentWeather(),
+      builder: (context, snapshot) {
+        //print(snapshot);
+        //print(snapshot.runtimeType);
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Center(child: CircularProgressIndicator.adaptive());
+        }
+        if (snapshot.hasError) {
+          return Center(child: Text(snapshot.error.toString()));
+        }
 
-      body: FutureBuilder(
-        future: getCurrentWeather(),
-        builder: (context, snapshot) {
-          //print(snapshot);
-          //print(snapshot.runtimeType);
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator.adaptive());
-          }
-          if (snapshot.hasError) {
-            return Center(child: Text(snapshot.error.toString()));
-          }
+        //if(snapshot.hasData!=null){} to check if data is null or not
 
-          //if(snapshot.hasData!=null){} to check if data is null or not
+        final data = snapshot.data!;
 
-          final data = snapshot.data!;
+        final currentweatherdata = data['list'][0];
 
-          final currentweatherdata = data['list'][0];
+        final double currentTemp = currentweatherdata['main']['temp'];
+        final currentSky = currentweatherdata['weather'][0]['main'];
+        final pressure = currentweatherdata['main']['pressure'];
+        final windspeed = currentweatherdata['wind']['speed'];
+        final humidity = currentweatherdata['main']['humidity'];
+        final icon = currentweatherdata['weather'][0]['icon'];
+        final double temp = currentTemp - 273.15;
 
-          final double currentTemp = currentweatherdata['main']['temp'];
-          final currentSky = currentweatherdata['weather'][0]['main'];
-          final pressure = currentweatherdata['main']['pressure'];
-          final windspeed = currentweatherdata['wind']['speed'];
-          final humidity = currentweatherdata['main']['humidity'];
-          final icon = currentweatherdata['weather'][0]['icon'];
-          final double temp = currentTemp - 273.15;
+        return Scaffold(
+          backgroundColor: getBackgroundColor(temp),
 
-          return Scaffold(
-            body: Padding(
-              padding: const EdgeInsets.all(16.0),
-
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // main card
-                  SizedBox(
-                    width: double.infinity,
-                    child: BackdropFilter(
-                      filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                      child: Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text(
-                              temp.toStringAsFixed(2),
-                              //'${(currentTemp - 273.15).toStringAsFixed(2)}°C',
-                              style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 32,
-                                fontStyle: FontStyle.italic,
-                              ),
-                            ),
-                            // WeatherIconWidget(
-                            //   iconCode: icon,
-                            //   height: 150,
-                            //   width: 150,
-                            // ),
-                            Text(
-                              currentSky,
-                              style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 26,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-
-                  const SizedBox(height: 20),
-
-                  const Text(
-                    'Hourley Forecast',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
-                  ),
-
-                  const SizedBox(height: 16),
-
-                  // SingleChildScrollView(
-                  //   scrollDirection: Axis.horizontal,
-                  //   child: Row(
-                  //     children: [
-                  //       for (int i = 0; i < 30; i++)
-                  //         HourleyForecastItem(
-                  //           time: data['list'][i + 1]['dt'].toString(),
-                  //           icon: WeatherIconWidget(
-                  //             iconCode: data['list'][i + 1]['weather'][0]['icon'],
-                  //             height: 70,
-                  //             width: 70,
-                  //           ),
-                  //           temp: data['list'][i + 1]['main']['temp'].toString(),
-                  //         ),
-                  //     ],
-                  //   ),
-                  // ),
-                  //Additional Information
-                  SizedBox(
-                    height: 175,
-
-                    child: ListView.builder(
-                      itemCount: 6,
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) {
-                        final hourleyForecast = data['list'][index + 1];
-                        final time = DateTime.parse(hourleyForecast['dt_txt']);
-                        return HourleyForecastItem(
-                          time: DateFormat.j().format(time),
-                          icon: WeatherIconWidget(
-                            iconCode: hourleyForecast['weather'][0]['icon'],
-                            height: 70,
-                            width: 70,
-                          ),
-                          temp: hourleyForecast['main']['temp'].toString(),
-                        );
-                      },
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                  const Text(
-                    'Additional Information',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
-                  ),
-                  const SizedBox(height: 16),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      AdditionalForecast(
-                        icon: Icons.water_drop,
-                        label: 'Humidity',
-                        value: humidity.toString(),
-                      ),
-                      //SizedBox(width: 60),
-                      AdditionalForecast(
-                        icon: Icons.air,
-                        label: 'Wind Speed',
-                        value: windspeed.toString(),
-                      ),
-                      //SizedBox(width: 60),
-                      AdditionalForecast(
-                        icon: Icons.beach_access,
-                        label: 'pressure',
-                        value: pressure.toString(),
-                      ),
-                    ],
-                  ),
-                ],
+          appBar: AppBar(
+            title: const Text(
+              'Weather App',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontStyle: FontStyle.normal,
               ),
             ),
-          );
-        },
-      ),
+            centerTitle: true,
+            actions: [
+              IconButton(
+                onPressed: () {
+                  setState(() {});
+                },
+                icon: const Icon(Icons.refresh),
+              ),
+            ],
+          ),
+
+          body: Padding(
+            padding: const EdgeInsets.all(16.0),
+
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // main card
+                SizedBox(
+                  width: double.infinity,
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text(
+                            temp.toStringAsFixed(2),
+                            //'${(currentTemp - 273.15).toStringAsFixed(2)}°C',
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 32,
+                              fontStyle: FontStyle.italic,
+                            ),
+                          ),
+                          // WeatherIconWidget(
+                          //   iconCode: icon,
+                          //   height: 150,
+                          //   width: 150,
+                          // ),
+                          Text(
+                            currentSky,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 26,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+
+                const SizedBox(height: 20),
+
+                const Text(
+                  'Hourley Forecast',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+                ),
+
+                const SizedBox(height: 16),
+
+                // SingleChildScrollView(
+                //   scrollDirection: Axis.horizontal,
+                //   child: Row(
+                //     children: [
+                //       for (int i = 0; i < 30; i++)
+                //         HourleyForecastItem(
+                //           time: data['list'][i + 1]['dt'].toString(),
+                //           icon: WeatherIconWidget(
+                //             iconCode: data['list'][i + 1]['weather'][0]['icon'],
+                //             height: 70,
+                //             width: 70,
+                //           ),
+                //           temp: data['list'][i + 1]['main']['temp'].toString(),
+                //         ),
+                //     ],
+                //   ),
+                // ),
+                //Additional Information
+                SizedBox(
+                  height: 175,
+
+                  child: ListView.builder(
+                    itemCount: 6,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      final hourleyForecast = data['list'][index + 1];
+                      final time = DateTime.parse(hourleyForecast['dt_txt']);
+                      return HourleyForecastItem(
+                        time: DateFormat.j().format(time),
+                        icon: WeatherIconWidget(
+                          iconCode: hourleyForecast['weather'][0]['icon'],
+                          height: 70,
+                          width: 70,
+                        ),
+                        temp: hourleyForecast['main']['temp'].toString(),
+                      );
+                    },
+                  ),
+                ),
+                const SizedBox(height: 20),
+                const Text(
+                  'Additional Information',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+                ),
+                const SizedBox(height: 16),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    AdditionalForecast(
+                      icon: Icons.water_drop,
+                      label: 'Humidity',
+                      value: humidity.toString(),
+                    ),
+                    //SizedBox(width: 60),
+                    AdditionalForecast(
+                      icon: Icons.air,
+                      label: 'Wind Speed',
+                      value: windspeed.toString(),
+                    ),
+                    //SizedBox(width: 60),
+                    AdditionalForecast(
+                      icon: Icons.beach_access,
+                      label: 'pressure',
+                      value: pressure.toString(),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }
