@@ -75,12 +75,14 @@ class _WeatherScreenState extends State<WeatherScreen> {
         final humidity = currentweatherdata['main']['humidity'];
         final icon = currentweatherdata['weather'][0]['icon'];
         final double temp = currentTemp - 273.15;
+        final cityName = data['city']['name'];
+        final displayCity = cityName.isEmpty ? '' : cityName;
 
         return Scaffold(
           backgroundColor: getBackgroundColor(temp),
 
           appBar: AppBar(
-            title: Center(child: Text('India')),
+            title: Text(cityName),
             backgroundColor: getBackgroundColor(temp),
             actions: [
               IconButton(
