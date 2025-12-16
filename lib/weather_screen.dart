@@ -82,17 +82,42 @@ class _WeatherScreenState extends State<WeatherScreen> {
           backgroundColor: getBackgroundColor(temp),
 
           appBar: AppBar(
-            title: Center(
-              child: Text(
-                cityName,
-                style: TextStyle(
-                  fontSize: 26,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
-                ),
-              ),
-            ),
             backgroundColor: getBackgroundColor(temp),
+            title: Row(
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      width: 60,
+                      height: 4,
+                      color: Colors.black,
+                      margin: EdgeInsets.symmetric(vertical: 2),
+                    ),
+
+                    Container(
+                      width: 40,
+                      height: 4,
+                      color: Colors.black,
+                      margin: EdgeInsets.symmetric(vertical: 2),
+                    ),
+                  ],
+                ),
+                
+                
+              ],
+            ),
+
+            // title: Center(
+            //   child: Text(
+            //     cityName,
+            //     style: TextStyle(
+            //       fontSize: 26,
+            //       fontWeight: FontWeight.bold,
+            //       color: Colors.black,
+            //     ),
+            //   ),
+            // ),
             actions: [
               IconButton(
                 onPressed: () {
