@@ -1,4 +1,5 @@
 import 'package:geolocator/geolocator.dart';
+import 'package:geocoding/geocoding.dart';
 
 /// Determine the current position of the device.
 ///
@@ -40,4 +41,19 @@ Future<Position> getCurrentPosition() async {
   // When we reach here, permissions are granted and we can
   // continue accessing the position of the device.
   return await Geolocator.getCurrentPosition();
+}
+
+Future<Map<String, String>> getCurrentPlace() async {
+  final position = await getCurrentPosition();
+  List<Placemark> placemarks = await placemarkFromCoordinates(
+    position.latitude,
+    position.longitude,
+  );
+  final place = placemarks[0];
+
+  return {
+    'city': place.locality ?? '',
+    'area': place.subLocality ?? '',
+    'state': place.administrativeArea ?? '',
+  };
 }
