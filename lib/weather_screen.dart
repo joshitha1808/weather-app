@@ -175,7 +175,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                             ),
                             margin: const EdgeInsets.only(top: 6),
                             height: 40,
-                            width: 180,
+                            width: 190,
                             decoration: BoxDecoration(
                               color: Colors.black,
                               borderRadius: BorderRadius.circular(50),
@@ -183,11 +183,19 @@ class _WeatherScreenState extends State<WeatherScreen> {
                           ),
                           SizedBox(height: 8),
                           Text(
+                            currentSky,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 26,
+                            ),
+                          ),
+                          Text(
                             temp.toStringAsFixed(2),
                             //'${(currentTemp - 273.15).toStringAsFixed(2)}°C',
                             style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 32,
+                              
                             ),
                           ),
 
@@ -196,13 +204,6 @@ class _WeatherScreenState extends State<WeatherScreen> {
                           //   height: 150,
                           //   width: 150,
                           // ),
-                          Text(
-                            currentSky,
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 26,
-                            ),
-                          ),
                         ],
                       ),
                     ),
