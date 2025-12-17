@@ -284,7 +284,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                       AdditionalForecast(
                         icon: Icons.waves_outlined,
                         color: getBackgroundColor(temp),
-                        label: 'Wind Speed',
+                        label: 'Wind',
                         value: windspeed.toString(),
                       ),
                       AdditionalForecast(
