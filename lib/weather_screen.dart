@@ -214,7 +214,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                     ),
                   ),
                 ),
-//Additional information
+                //Additional information
                 const SizedBox(height: 10),
                 Container(
                   padding: const EdgeInsets.symmetric(
@@ -250,6 +250,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                     ],
                   ),
                 ),
+                SizedBox(height: 50),
 
                 const Text(
                   'Hourley Forecast',
@@ -297,7 +298,6 @@ class _WeatherScreenState extends State<WeatherScreen> {
                     },
                   ),
                 ),
-                const SizedBox(height: 20),
 
                 // const Text(
                 //   'Additional Information',
