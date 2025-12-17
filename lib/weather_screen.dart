@@ -284,22 +284,21 @@ class _WeatherScreenState extends State<WeatherScreen> {
                       AdditionalForecast(
                         icon: Icons.waves_outlined,
                         color: getBackgroundColor(temp),
-                        label: 'Wind',
                         value: windspeed.toString(),
+                        label: 'Wind',
                       ),
                       AdditionalForecast(
                         icon: Icons.water_drop_outlined,
                         color: getBackgroundColor(temp),
-
-                        label: 'Humidity',
                         value: humidity.toString(),
+                        label: 'Humidity',
                       ),
 
                       AdditionalForecast(
                         icon: Icons.beach_access_outlined,
                         color: getBackgroundColor(temp),
-                        label: 'Pressure',
                         value: pressure.toString(),
+                        label: 'Pressure',
                       ),
                     ],
                   ),
