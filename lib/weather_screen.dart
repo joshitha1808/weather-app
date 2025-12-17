@@ -78,6 +78,8 @@ class _WeatherScreenState extends State<WeatherScreen> {
         final cityName = data['city']['name'];
         //final displayCity = cityName.isEmpty ? '' : cityName;
 
+        String date = DateFormat('EEEE, dd MMMM').format(DateTime.now());
+
         return Scaffold(
           backgroundColor: getBackgroundColor(temp),
 
@@ -92,32 +94,49 @@ class _WeatherScreenState extends State<WeatherScreen> {
                       width: 60,
                       height: 4,
                       color: Colors.black,
-                      margin: EdgeInsets.symmetric(vertical: 2),
+                      margin: const EdgeInsets.symmetric(vertical: 2),
                     ),
-
+                    SizedBox(height: 8),
                     Container(
                       width: 40,
                       height: 4,
                       color: Colors.black,
-                      margin: EdgeInsets.symmetric(vertical: 2),
+                      margin: const EdgeInsets.symmetric(vertical: 2),
                     ),
                   ],
                 ),
-                
-                
+
+                const SizedBox(width: 16),
+
+                Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        cityName,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          fontSize: 26,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
+                      ),
+                      // Container(
+                      //   margin: const EdgeInsets.only(top: 6),
+                      //   height: 40,
+                      //   width: 80,
+                      //   decoration: BoxDecoration(
+                      //     color: Colors.black,
+                      //     borderRadius: BorderRadius.circular(6),
+                      //   ),
+                      // ),
+                    ],
+                  ),
+                ),
               ],
             ),
-
-            // title: Center(
-            //   child: Text(
-            //     cityName,
-            //     style: TextStyle(
-            //       fontSize: 26,
-            //       fontWeight: FontWeight.bold,
-            //       color: Colors.black,
-            //     ),
-            //   ),
-            // ),
             actions: [
               IconButton(
                 onPressed: () {
@@ -144,6 +163,25 @@ class _WeatherScreenState extends State<WeatherScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
+                          Container(
+                            child: Center(
+                              child: Text(
+                                date,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15,
+                                ),
+                              ),
+                            ),
+                            margin: const EdgeInsets.only(top: 6),
+                            height: 40,
+                            width: 180,
+                            decoration: BoxDecoration(
+                              color: Colors.black,
+                              borderRadius: BorderRadius.circular(50),
+                            ),
+                          ),
+                          SizedBox(height: 8),
                           Text(
                             temp.toStringAsFixed(2),
                             //'${(currentTemp - 273.15).toStringAsFixed(2)}°C',
