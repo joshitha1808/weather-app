@@ -290,7 +290,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                       AdditionalForecast(
                         icon: Icons.water_drop_outlined,
                         color: getBackgroundColor(temp),
-                        value: humidity.toString(),
+                        value: '${humidity.toString()}%',
                         label: 'Humidity',
                       ),
 
