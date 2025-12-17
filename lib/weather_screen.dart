@@ -264,32 +264,44 @@ class _WeatherScreenState extends State<WeatherScreen> {
                   ),
                 ),
                 const SizedBox(height: 20),
-                const Text(
-                  'Additional Information',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
-                ),
-                const SizedBox(height: 16),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    AdditionalForecast(
-                      icon: Icons.water_drop,
-                      label: 'Humidity',
-                      value: humidity.toString(),
-                    ),
-                    //SizedBox(width: 60),
-                    AdditionalForecast(
-                      icon: Icons.air,
-                      label: 'Wind Speed',
-                      value: windspeed.toString(),
-                    ),
-                    //SizedBox(width: 60),
-                    AdditionalForecast(
-                      icon: Icons.beach_access,
-                      label: 'pressure',
-                      value: pressure.toString(),
-                    ),
-                  ],
+                // const Text(
+                //   'Additional Information',
+                //   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+                // ),
+                // const SizedBox(height: 16),
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 24.0,
+                    horizontal: 16.0,
+                  ),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: Colors.black,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      AdditionalForecast(
+                        icon: Icons.water_drop_outlined,
+                        color: getBackgroundColor(temp),
+
+                        label: 'Humidity',
+                        value: humidity.toString(),
+                      ),
+                      AdditionalForecast(
+                        icon: Icons.air_outlined,
+                        color: getBackgroundColor(temp),
+                        label: 'Wind Speed',
+                        value: windspeed.toString(),
+                      ),
+                      AdditionalForecast(
+                        icon: Icons.beach_access_outlined,
+                        color: getBackgroundColor(temp),
+                        label: 'Pressure',
+                        value: pressure.toString(),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
