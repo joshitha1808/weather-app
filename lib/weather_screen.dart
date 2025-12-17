@@ -222,7 +222,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                     horizontal: 16.0,
                   ),
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
+                    borderRadius: BorderRadius.circular(14),
                     color: Colors.black,
                   ),
                   child: Row(
