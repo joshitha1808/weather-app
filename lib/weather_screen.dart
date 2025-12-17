@@ -282,18 +282,19 @@ class _WeatherScreenState extends State<WeatherScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       AdditionalForecast(
+                        icon: Icons.waves_outlined,
+                        color: getBackgroundColor(temp),
+                        label: 'Wind Speed',
+                        value: windspeed.toString(),
+                      ),
+                      AdditionalForecast(
                         icon: Icons.water_drop_outlined,
                         color: getBackgroundColor(temp),
 
                         label: 'Humidity',
                         value: humidity.toString(),
                       ),
-                      AdditionalForecast(
-                        icon: Icons.waves_outlined,
-                        color: getBackgroundColor(temp),
-                        label: 'Wind Speed',
-                        value: windspeed.toString(),
-                      ),
+
                       AdditionalForecast(
                         icon: Icons.beach_access_outlined,
                         color: getBackgroundColor(temp),
