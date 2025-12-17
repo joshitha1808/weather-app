@@ -4,12 +4,14 @@ class AdditionalForecast extends StatelessWidget {
   final IconData icon;
   final String label;
   final String value;
+  final Color? color;
 
   const AdditionalForecast({
     super.key,
     required this.icon,
     required this.label,
     required this.value,
+    required this.color,
   });
 
   @override
@@ -18,7 +20,8 @@ class AdditionalForecast extends StatelessWidget {
       padding: EdgeInsets.all(8.0),
       child: Column(
         children: [
-          Icon(icon, size: 35),
+          Icon(icon, size: 35, color: color ?? Colors.white),
+
           SizedBox(height: 8),
           Text(
             label,
