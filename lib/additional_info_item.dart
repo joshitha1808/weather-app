@@ -20,7 +20,7 @@ class AdditionalForecast extends StatelessWidget {
       padding: EdgeInsets.all(8.0),
       child: Column(
         children: [
-          Icon(icon, size: 35, color: color ?? Colors.white),
+          Icon(icon, size: 45, color: color ?? Colors.white),
 
           SizedBox(height: 8),
           Text(
