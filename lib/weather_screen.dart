@@ -162,6 +162,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                       padding: const EdgeInsets.all(16.0),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Container(
                             child: Center(
@@ -187,15 +188,19 @@ class _WeatherScreenState extends State<WeatherScreen> {
                             style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 26,
+                              color: Colors.black,
+                              height: 1.0,
                             ),
                           ),
+                          //SizedBox(height: 8),
                           Text(
-                            temp.toStringAsFixed(2),
+                            '${temp.toStringAsFixed(0)}°',
                             //'${(currentTemp - 273.15).toStringAsFixed(2)}°C',
                             style: const TextStyle(
                               fontWeight: FontWeight.bold,
-                              fontSize: 32,
-                              
+                              fontSize: 150,
+                              color: Colors.black,
+                              height: 1.0,
                             ),
                           ),
 
@@ -210,14 +215,14 @@ class _WeatherScreenState extends State<WeatherScreen> {
                   ),
                 ),
 
-                const SizedBox(height: 20),
+                const SizedBox(height: 10),
 
                 const Text(
                   'Hourley Forecast',
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
                 ),
 
-                const SizedBox(height: 16),
+                const SizedBox(height: 6),
 
                 // SingleChildScrollView(
                 //   scrollDirection: Axis.horizontal,
