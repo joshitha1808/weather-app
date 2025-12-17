@@ -214,8 +214,42 @@ class _WeatherScreenState extends State<WeatherScreen> {
                     ),
                   ),
                 ),
-
+//Additional information
                 const SizedBox(height: 10),
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 24.0,
+                    horizontal: 16.0,
+                  ),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: Colors.black,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      AdditionalForecast(
+                        icon: Icons.waves_outlined,
+                        color: getBackgroundColor(temp),
+                        value: '${windspeed.toStringAsFixed(0)}km/h',
+                        label: 'Wind',
+                      ),
+                      AdditionalForecast(
+                        icon: Icons.water_drop_outlined,
+                        color: getBackgroundColor(temp),
+                        value: '${humidity.toString()}%',
+                        label: 'Humidity',
+                      ),
+
+                      AdditionalForecast(
+                        icon: Icons.beach_access_outlined,
+                        color: getBackgroundColor(temp),
+                        value: pressure.toString(),
+                        label: 'Pressure',
+                      ),
+                    ],
+                  ),
+                ),
 
                 const Text(
                   'Hourley Forecast',
@@ -264,45 +298,12 @@ class _WeatherScreenState extends State<WeatherScreen> {
                   ),
                 ),
                 const SizedBox(height: 20),
+
                 // const Text(
                 //   'Additional Information',
                 //   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
                 // ),
                 // const SizedBox(height: 16),
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 24.0,
-                    horizontal: 16.0,
-                  ),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: Colors.black,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      AdditionalForecast(
-                        icon: Icons.waves_outlined,
-                        color: getBackgroundColor(temp),
-                        value: '${windspeed.toStringAsFixed(0)}km/h',
-                        label: 'Wind',
-                      ),
-                      AdditionalForecast(
-                        icon: Icons.water_drop_outlined,
-                        color: getBackgroundColor(temp),
-                        value: '${humidity.toString()}%',
-                        label: 'Humidity',
-                      ),
-
-                      AdditionalForecast(
-                        icon: Icons.beach_access_outlined,
-                        color: getBackgroundColor(temp),
-                        value: pressure.toString(),
-                        label: 'Pressure',
-                      ),
-                    ],
-                  ),
-                ),
               ],
             ),
           ),
