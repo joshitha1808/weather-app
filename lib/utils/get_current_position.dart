@@ -51,9 +51,5 @@ Future<Map<String, String>> getCurrentPlace() async {
   );
   final place = placemarks[0];
 
-  return {
-    'city': place.locality ?? '',
-    'area': place.subLocality ?? '',
-    'state': place.administrativeArea ?? '',
-  };
+  return {'city': place.locality ?? ''};
 }
