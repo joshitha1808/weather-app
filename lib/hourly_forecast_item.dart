@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
+import 'utils/get_background_color.dart';
+
 class HourleyForecastItem extends StatelessWidget {
   final String time;
   final Widget icon;
-  final String temp;
+  final double temp;
 
   const HourleyForecastItem({
     super.key,
@@ -18,10 +20,15 @@ class HourleyForecastItem extends StatelessWidget {
       height: 150,
       width: 100,
       child: Card(
-        elevation: 6,
+        elevation: 0,
         child: Container(
           padding: const EdgeInsets.all(6.0),
-          decoration: BoxDecoration(borderRadius: BorderRadius.circular(12)),
+
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(width: 4),
+            color: getBackgroundColor(temp).$1,
+          ),
           child: Column(
             children: [
               Text(
@@ -29,22 +36,22 @@ class HourleyForecastItem extends StatelessWidget {
                 style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
+                  color: Colors.black,
                 ),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),
 
-              const SizedBox(height: 8),
-
+              //const SizedBox(height: 4),
               icon,
 
-              const SizedBox(height: 8),
-
+              //const SizedBox(height: 4),
               Text(
-                '${(double.parse(temp) - 273.15).toStringAsFixed(2)}°C',
+                '${(temp).toStringAsFixed(2)}°C',
                 style: const TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.normal,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
                 ),
                 maxLines: 1,
               ),
