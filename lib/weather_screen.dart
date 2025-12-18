@@ -279,8 +279,12 @@ class _WeatherScreenState extends State<WeatherScreen> {
                 SizedBox(height: 30),
 
                 const Text(
-                  'Hourley Forecast',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+                  'Weekly forecast',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 24,
+                    color: Colors.black,
+                  ),
                 ),
 
                 // SingleChildScrollView(
@@ -300,6 +304,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                 //     ],
                 //   ),
                 // ),
+                SizedBox(height: 4),
                 SizedBox(
                   height: 160,
 
