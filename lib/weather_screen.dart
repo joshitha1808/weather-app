@@ -38,13 +38,22 @@ class _WeatherScreenState extends State<WeatherScreen> {
   }
 
   //Background colour
-  Color getBackgroundColor(double temp) {
+  (Color, String) getBackgroundColor(double temp) {
     if (temp < 20) {
-      return const Color(0xFFFF64D4);
+      return (
+        const Color(0xFFFF64D4),
+        'Now it feels like +15°. It feels cool because of the rains. Today, the temperature is felt in the range from +20° to +15°.',
+      );
     } else if (temp >= 20 && temp < 30) {
-      return const Color(0xFF42C6FF);
+      return (
+        const Color(0xFF42C6FF),
+        'Now it feels like +25°. It feels humid now because of the heavy rain. Today, the temperature is felt in the range from +22° to +28°.',
+      );
     } else {
-      return const Color(0xFFFFE142);
+      return (
+        const Color(0xFFFFE142),
+        'Now it feels like +30°. It feels hot because of the direct sun. Today, the temperature is felt in the range from +31° to +27°.',
+      );
     }
   }
 
@@ -81,10 +90,10 @@ class _WeatherScreenState extends State<WeatherScreen> {
         String date = DateFormat('EEEE, dd MMMM').format(DateTime.now());
 
         return Scaffold(
-          backgroundColor: getBackgroundColor(temp),
+          backgroundColor: getBackgroundColor(temp).$1,
 
           appBar: AppBar(
-            backgroundColor: getBackgroundColor(temp),
+            backgroundColor: getBackgroundColor(temp).$1,
             title: Row(
               children: [
                 Column(
@@ -214,8 +223,25 @@ class _WeatherScreenState extends State<WeatherScreen> {
                     ),
                   ),
                 ),
+                Text(
+                  'Daily Summary',
+                  style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
+                ),
+                SizedBox(height: 10),
+                Text(
+                  getBackgroundColor(temp).$2,
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.normal,
+                    color: Colors.black,
+                  ),
+                ),
                 //Additional information
-                const SizedBox(height: 10),
+                const SizedBox(height: 20),
                 Container(
                   padding: const EdgeInsets.symmetric(
                     vertical: 24.0,
@@ -230,20 +256,20 @@ class _WeatherScreenState extends State<WeatherScreen> {
                     children: [
                       AdditionalForecast(
                         icon: Icons.waves_outlined,
-                        color: getBackgroundColor(temp),
+                        color: getBackgroundColor(temp).$1,
                         value: '${windspeed.toStringAsFixed(0)}km/h',
                         label: 'Wind',
                       ),
                       AdditionalForecast(
                         icon: Icons.water_drop_outlined,
-                        color: getBackgroundColor(temp),
+                        color: getBackgroundColor(temp).$1,
                         value: '${humidity.toString()}%',
                         label: 'Humidity',
                       ),
 
                       AdditionalForecast(
                         icon: Icons.beach_access_outlined,
-                        color: getBackgroundColor(temp),
+                        color: getBackgroundColor(temp).$1,
                         value: pressure.toString(),
                         label: 'Pressure',
                       ),
@@ -280,22 +306,25 @@ class _WeatherScreenState extends State<WeatherScreen> {
                 SizedBox(
                   height: 175,
 
-                  child: ListView.builder(
-                    itemCount: 6,
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (context, index) {
-                      final hourleyForecast = data['list'][index + 1];
-                      final time = DateTime.parse(hourleyForecast['dt_txt']);
-                      return HourleyForecastItem(
-                        time: DateFormat.j().format(time),
-                        icon: WeatherIconWidget(
-                          iconCode: hourleyForecast['weather'][0]['icon'],
-                          height: 70,
-                          width: 70,
-                        ),
-                        temp: hourleyForecast['main']['temp'].toString(),
-                      );
-                    },
+                  child: Expanded(
+                    child: ListView.builder(
+                      
+                      itemCount: 6,
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, index) {
+                        final hourleyForecast = data['list'][index + 1];
+                        final time = DateTime.parse(hourleyForecast['dt_txt']);
+                        return HourleyForecastItem(
+                          time: DateFormat.j().format(time),
+                          icon: WeatherIconWidget(
+                            iconCode: hourleyForecast['weather'][0]['icon'],
+                            height: 70,
+                            width: 70,
+                          ),
+                          temp: hourleyForecast['main']['temp'].toString(),
+                        );
+                      },
+                    ),
                   ),
                 ),
 
