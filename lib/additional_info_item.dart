@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class AdditionalForecast extends StatelessWidget {
   final IconData icon;
-  final String label;
+  final Widget label;
   final Widget value;
   final Color? color;
 
@@ -25,10 +25,7 @@ class AdditionalForecast extends StatelessWidget {
           SizedBox(height: 8),
           value,
           SizedBox(height: 8),
-          Text(
-            label,
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-          ),
+          label,
         ],
       ),
     );
