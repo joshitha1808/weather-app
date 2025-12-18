@@ -276,14 +276,12 @@ class _WeatherScreenState extends State<WeatherScreen> {
                     ],
                   ),
                 ),
-                SizedBox(height: 50),
+                SizedBox(height: 30),
 
                 const Text(
                   'Hourley Forecast',
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
                 ),
-
-                const SizedBox(height: 6),
 
                 // SingleChildScrollView(
                 //   scrollDirection: Axis.horizontal,
@@ -302,29 +300,25 @@ class _WeatherScreenState extends State<WeatherScreen> {
                 //     ],
                 //   ),
                 // ),
-                //Additional Information
                 SizedBox(
-                  height: 175,
+                  height: 160,
 
-                  child: Expanded(
-                    child: ListView.builder(
-                      
-                      itemCount: 6,
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) {
-                        final hourleyForecast = data['list'][index + 1];
-                        final time = DateTime.parse(hourleyForecast['dt_txt']);
-                        return HourleyForecastItem(
-                          time: DateFormat.j().format(time),
-                          icon: WeatherIconWidget(
-                            iconCode: hourleyForecast['weather'][0]['icon'],
-                            height: 70,
-                            width: 70,
-                          ),
-                          temp: hourleyForecast['main']['temp'].toString(),
-                        );
-                      },
-                    ),
+                  child: ListView.builder(
+                    itemCount: 6,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      final hourleyForecast = data['list'][index + 1];
+                      final time = DateTime.parse(hourleyForecast['dt_txt']);
+                      return HourleyForecastItem(
+                        time: DateFormat.j().format(time),
+                        icon: WeatherIconWidget(
+                          iconCode: hourleyForecast['weather'][0]['icon'],
+                          height: 70,
+                          width: 70,
+                        ),
+                        temp: hourleyForecast['main']['temp'].toString(),
+                      );
+                    },
                   ),
                 ),
 
