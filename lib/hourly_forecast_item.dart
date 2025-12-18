@@ -15,12 +15,12 @@ class HourleyForecastItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 175,
-      width: 150,
+      height: 150,
+      width: 100,
       child: Card(
         elevation: 6,
         child: Container(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(6.0),
           decoration: BoxDecoration(borderRadius: BorderRadius.circular(12)),
           child: Column(
             children: [
