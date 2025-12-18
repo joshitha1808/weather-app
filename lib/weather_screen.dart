@@ -265,7 +265,13 @@ class _WeatherScreenState extends State<WeatherScreen> {
                             fontWeight: FontWeight.normal,
                           ),
                         ),
-                        label: 'Wind',
+                        label: Text(
+                          'Wind',
+                          style: TextStyle(
+                            fontWeight: FontWeight.normal,
+                            color: getBackgroundColor(temp).$1,
+                          ),
+                        ),
                       ),
                       AdditionalForecast(
                         icon: Icons.water_drop_outlined,
@@ -278,7 +284,13 @@ class _WeatherScreenState extends State<WeatherScreen> {
                             fontWeight: FontWeight.normal,
                           ),
                         ),
-                        label: 'Humidity',
+                        label: Text(
+                          'Humidity',
+                          style: TextStyle(
+                            fontWeight: FontWeight.normal,
+                            color: getBackgroundColor(temp).$1,
+                          ),
+                        ),
                       ),
                       AdditionalForecast(
                         icon: Icons.beach_access_outlined,
@@ -291,7 +303,13 @@ class _WeatherScreenState extends State<WeatherScreen> {
                             fontWeight: FontWeight.normal,
                           ),
                         ),
-                        label: 'Pressure',
+                        label: Text(
+                          'pressure',
+                          style: TextStyle(
+                            fontWeight: FontWeight.normal,
+                            color: getBackgroundColor(temp).$1,
+                          ),
+                        ),
                       ),
                     ],
                   ),
