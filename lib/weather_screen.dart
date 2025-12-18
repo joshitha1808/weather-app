@@ -257,20 +257,40 @@ class _WeatherScreenState extends State<WeatherScreen> {
                       AdditionalForecast(
                         icon: Icons.waves_outlined,
                         color: getBackgroundColor(temp).$1,
-                        value: '${windspeed.toStringAsFixed(0)}km/h',
+                        value: Text(
+                          '${windspeed.toStringAsFixed(0)} km/h', // string interpolation
+                          style: TextStyle(
+                            color: getBackgroundColor(temp).$1,
+                            fontSize: 22,
+                            fontWeight: FontWeight.normal,
+                          ),
+                        ),
                         label: 'Wind',
                       ),
                       AdditionalForecast(
                         icon: Icons.water_drop_outlined,
                         color: getBackgroundColor(temp).$1,
-                        value: '${humidity.toString()}%',
+                        value: Text(
+                          '${humidity.toString()}%', // wrap string in Text
+                          style: TextStyle(
+                            color: getBackgroundColor(temp).$1,
+                            fontSize: 22,
+                            fontWeight: FontWeight.normal,
+                          ),
+                        ),
                         label: 'Humidity',
                       ),
-
                       AdditionalForecast(
                         icon: Icons.beach_access_outlined,
                         color: getBackgroundColor(temp).$1,
-                        value: pressure.toString(),
+                        value: Text(
+                          pressure.toString(),
+                          style: TextStyle(
+                            color: getBackgroundColor(temp).$1,
+                            fontSize: 22,
+                            fontWeight: FontWeight.normal,
+                          ),
+                        ),
                         label: 'Pressure',
                       ),
                     ],
